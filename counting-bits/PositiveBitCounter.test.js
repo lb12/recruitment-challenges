@@ -2,6 +2,14 @@ const PositiveBitCounter = require('./PositiveBitCounter')
 const assert = require('assert')
 
 describe('PositiveBitCounter', function () {
+  it('Should return a TypeError when a not a number value is supplied', function () {
+    assert.throws(
+      () => PositiveBitCounter.Count('a'),
+      function isTypeError (error) {
+        return (error instanceof TypeError)
+      })
+  })
+
   it('Should return a RangeError when a negative value is supplied', function () {
     assert.throws(
       () => PositiveBitCounter.Count(-2),
@@ -19,6 +27,12 @@ describe('PositiveBitCounter', function () {
   it('Should return the expected count for input = 1', function () {
     let expected = [1, 0]
     let actual = PositiveBitCounter.Count(1)
+    assert.deepEqual(actual, expected)
+  })
+
+  it('Should return the expected count for input = 79', function () {
+    let expected = [5, 0, 1, 2, 3, 6]
+    let actual = PositiveBitCounter.Count(79)
     assert.deepEqual(actual, expected)
   })
 
